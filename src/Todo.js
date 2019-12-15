@@ -15,6 +15,16 @@ export default class Todo extends Component {
     this.handleToggle = this.handleToggle.bind(this);
   }
 
+  // componentDidUpdate(prevProps, prevState) {
+  //   console.log("Todo comp did update");
+  //   console.log(prevProps.task);
+  //   console.log(this.props.task);
+  // }
+
+  componentWillUnmount() {
+    console.log("comp unmount");
+  }
+
   handleRemove() {
     this.props.removeTodo(this.props.id);
   }
@@ -43,7 +53,7 @@ export default class Todo extends Component {
     let result;
     if (this.state.isEditing) {
       result = (
-        <div>
+        <div className="Todo">
           <form onSubmit={this.handleUpdate}>
             <input type="text" value={this.state.task} name="task" onChange={this.handleChange} />
             <button>Save</button>
@@ -52,10 +62,10 @@ export default class Todo extends Component {
       )
     } else {
       result = (
-        <div>
+        <div className="Todo">
           <button onClick={this.toggleForm}>Edit</button>
           <button onClick={this.handleRemove}>X</button>
-          <li className={this.props.completed ? "completed" : ""} onClick={this.handleToggle}>
+          <li className={this.props.completed ? "Todo-task completed" : "Todo-task"} onClick={this.handleToggle}>
             {this.props.task}
           </li>
         </div>
